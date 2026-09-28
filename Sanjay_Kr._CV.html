@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Kumar | Portfolio & Executive Resume</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        accent: {
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            pink: '#ec4899',
+                            amber: '#f59e0b',
+                            teal: '#14b8a6',
+                            cyan: '#06b6d4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Modern Glassmorphism & Visual Depth */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(52, 211, 153, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.25);
+        }
+        
+        .glass-nav {
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Gradient Text Utilities */
+        .gradient-text-emerald {
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-amber {
+            background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Particle Background Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* High Quality Printable Resume CSS Rules */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 8mm 10mm;
+            }
+
+            #particle-canvas,
+            nav,
+            .no-print,
+            button,
+            #mobile-menu {
+                display: none !important;
+            }
+
+            html, body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                font-size: 9pt !important;
+                line-height: 1.35 !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            main {
+                padding-top: 0 !important;
+            }
+
+            section {
+                padding-top: 0.4rem !important;
+                padding-bottom: 0.4rem !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .glass-card {
+                background: #ffffff !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                padding: 0.6rem !important;
+                border-radius: 0.5rem !important;
+            }
+
+            .text-slate-400, .text-slate-300, .text-slate-200, .text-slate-100 {
+                color: #1e293b !important;
+            }
+
+            .bg-slate-900, .bg-slate-950, .bg-slate-900\/60, .bg-slate-900\/80 {
+                background-color: #f8fafc !important;
+            }
+
+            .text-brand-400, .text-brand-500 {
+                color: #059669 !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .print-header {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                border-bottom: 2px solid #059669 !important;
+                padding-bottom: 0.5rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .print-photo {
+                width: 85px !important;
+                height: 85px !important;
+                border-radius: 50% !important;
+                border: 2px solid #059669 !important;
+            }
+
+            .print-grid-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 0.5rem !important;
+            }
+
+            .print-grid-3 {
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                gap: 0.5rem !important;
+            }
+
+            h1 { font-size: 1.6rem !important; line-height: 1.2 !important; }
+            h2 { font-size: 1.1rem !important; margin-bottom: 0.3rem !important; }
+            h3 { font-size: 0.9rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white relative overflow-x-hidden">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Printable Notification Action Bar -->
+    <div class="no-print bg-gradient-to-r from-emerald-700 via-teal-700 to-indigo-800 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-3 shadow-lg z-50 relative">
+        <span><i class="fa-solid fa-wand-magic-sparkles text-yellow-300 mr-1.5"></i> Redesigned Portfolio & Ready-to-Print CV Template</span>
+        <button onclick="window.print()" class="bg-white text-slate-950 px-3.5 py-1 rounded-full font-bold text-xs hover:bg-emerald-50 transition-all shadow hover:scale-105 flex items-center gap-1.5">
+            <i class="fa-solid fa-file-pdf text-emerald-600"></i> Save as PDF CV
+        </button>
+    </div>
+
+    <nav class="fixed top-9 left-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="font-display text-xl sm:text-2xl font-extrabold tracking-tight flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 text-base"><i class="fa-solid fa-code"></i></span>
+                <span>Sanjay<span class="text-emerald-400">.Kumar</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-emerald-400 transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-emerald-400 transition-colors">Experience</a>
+                <a href="#education" class="hover:text-emerald-400 transition-colors">Education</a>
+                <a href="#certifications" class="hover:text-emerald-400 transition-colors">Certifications</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">Contact</a>
+                <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold hover:from-emerald-400 hover:to-teal-400 transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 text-xs">
+                    <i class="fa-solid fa-print"></i> PDF Resume
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none p-1">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-slate-800 px-6 py-6 space-y-4">
+            <a href="#about" class="block text-base font-semibold hover:text-emerald-400 transition-colors">About</a>
+            <a href="#skills" class="block text-base font-semibold hover:text-emerald-400 transition-colors">Skills</a>
+            <a href="#experience" class="block text-base font-semibold hover:text-emerald-400 transition-colors">Experience</a>
+            <a href="#education" class="block text-base font-semibold hover:text-emerald-400 transition-colors">Education</a>
+            <a href="#certifications" class="block text-base font-semibold hover:text-emerald-400 transition-colors">Certifications</a>
+            <a href="#contact" class="block text-base font-semibold hover:text-emerald-400 transition-colors">Contact</a>
+            <button onclick="window.print()" class="w-full text-center py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-pdf"></i> Download PDF CV
+            </button>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-28">
+
+        <section id="about" class="min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-10">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center print-header">
+                
+                <!-- Profile Image Card with Updated Photo -->
+                <div class="lg:col-span-5 flex justify-center reveal">
+                    <div class="relative group">
+                        <!-- Neon Glow Ring -->
+                        <div class="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse no-print"></div>
+                        
+                        <!-- Main Image Container -->
+                        <div class="relative rounded-full p-2 bg-slate-900 border-2 border-emerald-500/40 shadow-2xl">
+                            <img src="Pratap Sanjay Kumar.png" 
+                                 onerror="this.onerror=null; this.src='Pratap Sanjay Kumar_3.png';" 
+                                 alt="Sanjay Kumar" 
+                                 class="w-64 h-64 sm:w-80 sm:h-80 rounded-full object-cover object-top border-2 border-slate-800 shadow-inner print-photo">
+                        </div>
+
+                        <!-- Quick Availability Badge -->
+                        <div class="absolute bottom-3 right-3 bg-slate-900/90 border border-emerald-500/40 text-emerald-400 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-2 no-print backdrop-blur-md">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            Principal & IT Expert
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bio / Header Details -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-bold">
+                        <i class="fa-solid fa-graduation-cap"></i> 5+ Years Academic & IT Leadership
+                    </div>
+                    
+                    <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight">
+                        SANJAY <span class="gradient-text-emerald">KUMAR</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        Dedicated Education Professional with extensive experience in school administration, academic planning, computer education, and modern web technologies. Currently serving as <strong class="text-emerald-400 font-semibold">Principal at Buddha Residential School</strong> and remote <strong class="text-sky-400 font-semibold">Content Writer at Naksh Foundation (CyberShield)</strong>.
+                    </p>
+
+                    <!-- Contact Quick Info Pill Badges -->
+                    <div class="flex flex-wrap gap-3 justify-center lg:justify-start text-xs font-medium">
+                        <a href="mailto:pratapsanjaykumar@gmail.com" class="px-3.5 py-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-emerald-400"></i> pratapsanjaykumar@gmail.com
+                        </a>
+                        <a href="tel:+917803433596" class="px-3.5 py-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-sky-400"></i> +91 7803433596
+                        </a>
+                        <span class="px-3.5 py-2 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-indigo-400"></i> Patna, Bihar, India
+                        </span>
+                    </div>
+
+                    <!-- Call to Action Buttons -->
+                    <div class="pt-3 flex flex-wrap gap-4 justify-center lg:justify-start no-print">
+                        <button onclick="window.print()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold hover:from-emerald-400 hover:to-teal-400 transition-all hover:scale-105 shadow-xl shadow-emerald-500/25 flex items-center gap-2">
+                            <i class="fa-solid fa-file-arrow-down text-base"></i> Download Printable CV
+                        </button>
+                        <a href="#contact" class="px-8 py-3.5 rounded-xl glass-card hover:bg-slate-800/80 transition-all hover:scale-105 border border-slate-700 flex items-center gap-2 font-bold">
+                            <i class="fa-solid fa-paper-plane text-emerald-400"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <span class="text-xs font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-3.5 py-1 rounded-full border border-emerald-500/20">Core Competencies</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-3">Skills & Key Expertise</h2>
+                <p class="text-slate-400 mt-2 text-sm max-w-xl mx-auto">A unique blend of administrative leadership, computer science pedagogy, and software technical capabilities.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 print-grid-3">
+                
+                <!-- Skill Card 1: School Admin -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-emerald-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">School Administration</h3>
+                            <span class="text-[11px] text-emerald-400 font-semibold uppercase tracking-wider">Leadership</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Academic planning, staff coordination, institution building, policy execution, and day-to-day school operations.</p>
+                </div>
+
+                <!-- Skill Card 2: Computer Teaching -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-sky-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Computer Pedagogy</h3>
+                            <span class="text-[11px] text-sky-400 font-semibold uppercase tracking-wider">Education</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Teaching Computer Science, Math, and Science up to Class X using interactive, tech-enabled learning methodologies.</p>
+                </div>
+
+                <!-- Skill Card 3: Web Development -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-indigo-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Web Development</h3>
+                            <span class="text-[11px] text-indigo-400 font-semibold uppercase tracking-wider">Technical</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Crafting responsive front-end applications using HTML5, CSS3, JavaScript, Tailwind CSS, and website management.</p>
+                </div>
+
+                <!-- Skill Card 4: IT & Lab Setup -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-purple-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Lab Setup & Maintenance</h3>
+                            <span class="text-[11px] text-purple-400 font-semibold uppercase tracking-wider">Hardware / IT</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Computer lab design, hardware/software installation, network troubleshooting, and ICT infrastructure care.</p>
+                </div>
+
+                <!-- Skill Card 5: Content Writing -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-amber-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Digital Content Writing</h3>
+                            <span class="text-[11px] text-amber-400 font-semibold uppercase tracking-wider">Publication</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Authoring curriculum revision notes, appreciation letters, worksheets, and cyber security awareness content.</p>
+                </div>
+
+                <!-- Skill Card 6: MS Office & Records -->
+                <div class="glass-card glass-card-hover p-6 rounded-2xl border-l-4 border-l-pink-500 reveal">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/15 text-pink-400 flex items-center justify-center text-2xl no-print">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Advanced MS Office</h3>
+                            <span class="text-[11px] text-pink-400 font-semibold uppercase tracking-wider">Documentation</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Proficient in Word, Excel, PowerPoint, data entry operations, institutional record keeping, and report generation.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <span class="text-xs font-extrabold tracking-widest text-sky-400 uppercase bg-sky-500/10 px-3.5 py-1 rounded-full border border-sky-500/20">Career Journey</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-3">Professional Experience</h2>
+                <p class="text-slate-400 mt-2 text-sm">Demonstrated track record of progressive leadership and educational delivery</p>
+            </div>
+
+            <div class="relative border-l-2 border-slate-800 ml-4 md:ml-36 space-y-8">
+                
+                <!-- Experience Item 1 -->
+                <div class="relative pl-6 md:pl-10 reveal">
+                    <span class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-emerald-500 border-4 border-slate-950 shadow-lg shadow-emerald-500/50"></span>
+                    <span class="hidden md:block absolute -left-36 top-1 text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">03/2026 - Present</span>
+                    
+                    <div class="glass-card p-6 rounded-2xl hover:border-emerald-500/40 transition-colors">
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+                            <div>
+                                <span class="md:hidden text-xs font-extrabold text-emerald-400 block mb-1">03/2026 - Present</span>
+                                <h3 class="text-xl font-bold text-white">Principal & Academic Administrator</h3>
+                                <p class="text-emerald-400 font-semibold text-sm flex items-center gap-2 mt-0.5">
+                                    <i class="fa-solid fa-school text-xs"></i> Buddha Residential School, Dhanarua
+                                </p>
+                            </div>
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs font-bold border border-emerald-500/30">Current Role</span>
+                        </div>
+                        <ul class="mt-3 space-y-2 text-slate-300 text-xs sm:text-sm list-disc list-inside">
+                            <li>Leading overall school administration, academic policy creation, and strategic planning.</li>
+                            <li>Directing staff coordination, teacher mentoring, and continuous quality improvement.</li>
+                            <li>Overseeing institutional development, parent-teacher relations, and educational compliance.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="relative pl-6 md:pl-10 reveal">
+                    <span class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-sky-500 border-4 border-slate-950"></span>
+                    <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-md border border-sky-500/20">02/2026 - Present</span>
+                    
+                    <div class="glass-card p-6 rounded-2xl hover:border-sky-500/40 transition-colors">
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+                            <div>
+                                <span class="md:hidden text-xs font-extrabold text-sky-400 block mb-1">02/2026 - Present</span>
+                                <h3 class="text-xl font-bold text-white">Content Writer (Remote)</h3>
+                                <p class="text-sky-400 font-semibold text-sm flex items-center gap-2 mt-0.5">
+                                    <i class="fa-solid fa-shield-halved text-xs"></i> Naksh Foundation - CyberShield, New Delhi
+                                </p>
+                            </div>
+                            <span class="px-3 py-1 bg-sky-500/20 text-sky-300 rounded-full text-xs font-bold border border-sky-500/30">Remote</span>
+                        </div>
+                        <p class="mt-2 text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Creating official letters of appreciation, educational content, digital awareness modules, and outreach materials for cyber security initiatives across platforms.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="relative pl-6 md:pl-10 reveal">
+                    <span class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-amber-500 border-4 border-slate-950"></span>
+                    <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">07/2023 - Present</span>
+                    
+                    <div class="glass-card p-6 rounded-2xl hover:border-amber-500/40 transition-colors">
+                        <div>
+                            <span class="md:hidden text-xs font-extrabold text-amber-400 block mb-1">07/2023 - Present</span>
+                            <h3 class="text-xl font-bold text-white">Educational Content Developer</h3>
+                            <p class="text-amber-400 font-semibold text-sm flex items-center gap-2 mt-0.5">
+                                <i class="fa-solid fa-laptop text-xs"></i> Freelance / Independent
+                            </p>
+                        </div>
+                        <p class="mt-2 text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Developing curriculum-aligned revision notes, practice worksheets, test banks, and interactive computer education content tailored for high school students.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience Item 4 -->
+                <div class="relative pl-6 md:pl-10 reveal">
+                    <span class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-950"></span>
+                    <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-slate-400 bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700">04/2019 - 02/2026</span>
+                    
+                    <div class="glass-card p-6 rounded-2xl hover:border-slate-700 transition-colors">
+                        <div>
+                            <span class="md:hidden text-xs font-extrabold text-slate-400 block mb-1">04/2019 - 02/2026</span>
+                            <h3 class="text-xl font-bold text-white">Computer & Science Teacher</h3>
+                            <p class="text-slate-400 font-semibold text-sm flex items-center gap-2 mt-0.5">
+                                <i class="fa-solid fa-chalkboard text-xs"></i> Buddha Residential School, Dhanarua
+                            </p>
+                        </div>
+                        <p class="mt-2 text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Taught Computer Science, Mathematics, and General Science up to Class X using practical computer lab experiments, audio-visual aids, and modern technology.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <span class="text-xs font-extrabold tracking-widest text-indigo-400 uppercase bg-indigo-500/10 px-3.5 py-1 rounded-full border border-indigo-500/20">Academic Foundation</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-3">Education & Degrees</h2>
+                <p class="text-slate-400 mt-2 text-sm">Solid academic credentials in Education, English Literature, and Library Science</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 print-grid-3">
+                
+                <!-- Master of Arts -->
+                <div class="glass-card p-6 rounded-2xl hover:border-indigo-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-indigo-500/30">Pursuing</div>
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">M.A. in English</h3>
+                    <p class="text-xs text-indigo-400 font-semibold mt-0.5">IGNOU, New Delhi</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-indigo-400"></i> Expected Completion: Jan 2027
+                    </p>
+                </div>
+
+                <!-- B.Ed. Degree -->
+                <div class="glass-card p-6 rounded-2xl hover:border-emerald-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-emerald-500/30">Score: 65.6%</div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Bachelor of Education (B.Ed.)</h3>
+                    <p class="text-xs text-emerald-400 font-semibold mt-0.5">Sardar Patel Inst., Kurukshetra Univ.</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-emerald-400"></i> Completed: August 2026
+                    </p>
+                </div>
+
+                <!-- BLIS Degree -->
+                <div class="glass-card p-6 rounded-2xl hover:border-sky-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-sky-500/20 text-sky-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-sky-500/30">Score: 70.07%</div>
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Bachelor of Library Science (BLIS)</h3>
+                    <p class="text-xs text-sky-400 font-semibold mt-0.5">IGNOU, New Delhi</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-sky-400"></i> Completed: October 2025
+                    </p>
+                </div>
+
+                <!-- B.A. Degree -->
+                <div class="glass-card p-6 rounded-2xl hover:border-purple-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-purple-500/20 text-purple-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-purple-500/30">Score: 61%</div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-university"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Bachelor of Arts (English)</h3>
+                    <p class="text-xs text-purple-400 font-semibold mt-0.5">L.M. College, Magadh University</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-purple-400"></i> Completed: March 2024
+                    </p>
+                </div>
+
+                <!-- Senior Secondary XII -->
+                <div class="glass-card p-6 rounded-2xl hover:border-amber-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-amber-500/30">Score: 76.6%</div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-school-flag"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Class XII (PCM - Science)</h3>
+                    <p class="text-xs text-amber-400 font-semibold mt-0.5">High School Sain, Dhanarua (BSEB)</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-amber-400"></i> Completed: July 2020
+                    </p>
+                </div>
+
+                <!-- Secondary X -->
+                <div class="glass-card p-6 rounded-2xl hover:border-pink-500/50 transition-all reveal relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-pink-500/20 text-pink-300 text-[10px] font-bold uppercase px-3 py-1 rounded-bl-xl border-l border-b border-pink-500/30">Score: 65.4%</div>
+                    <div class="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl mb-4 no-print">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Class X (Matriculation)</h3>
+                    <p class="text-xs text-pink-400 font-semibold mt-0.5">High School Sain, Dhanarua (BSEB)</p>
+                    <p class="text-slate-400 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-pink-400"></i> Completed: June 2018
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="certifications" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Certifications Card -->
+                <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl reveal">
+                    <span class="text-xs font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-3.5 py-1 rounded-full border border-emerald-500/20">Credentials</span>
+                    <h3 class="font-display text-2xl font-bold mt-3 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-certificate text-emerald-400"></i> Technical Certifications
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-4 hover:border-emerald-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 no-print">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base text-white">ADCA (Advanced Diploma in Computer Applications)</h4>
+                                <p class="text-xs text-slate-400">Comprehensive course in computer systems, programming fundamentals, and office suites.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-4 hover:border-sky-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl shrink-0 no-print">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base text-white">Cyber Security Certification</h4>
+                                <p class="text-xs text-slate-400">Digital security awareness, threat protection protocols, and privacy best practices.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-4 hover:border-amber-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 no-print">
+                                <i class="fa-solid fa-keyboard"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base text-white">English & Hindi Typing Certification</h4>
+                                <p class="text-xs text-slate-400">High-speed bilingual keyboard typing efficiency for documentation and data entry.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages & Quick Contact Info -->
+                <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl reveal flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold tracking-widest text-teal-400 uppercase bg-teal-500/10 px-3.5 py-1 rounded-full border border-teal-500/20">Communication</span>
+                        <h3 class="font-display text-2xl font-bold mt-3 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-language text-teal-400"></i> Languages Known
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm font-bold mb-1">
+                                    <span>English</span>
+                                    <span class="text-emerald-400">Professional Proficiency</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                                    <div class="h-full bg-emerald-500 rounded-full w-11/12"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm font-bold mb-1">
+                                    <span>Hindi</span>
+                                    <span class="text-sky-400">Native / Fluent</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                                    <div class="h-full bg-sky-500 rounded-full w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-800/80">
+                        <h4 class="font-bold text-sm text-slate-300 uppercase tracking-wider mb-2">Permanent Address</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Vill - Jarkha, PO - Jarkha, PS - Sigori,<br>
+                            Subdivision - Paliganj, Dist - Patna, Bihar - 801110
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="glass-card rounded-3xl p-6 sm:p-12 relative overflow-hidden reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    
+                    <!-- Contact Details -->
+                    <div class="space-y-6">
+                        <span class="text-xs font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-3.5 py-1 rounded-full border border-emerald-500/20">Get In Touch</span>
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold">Let's Connect & Collaborate</h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Open for institutional leadership opportunities, academic consulting, content development, and web development projects.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <a href="mailto:pratapsanjaykumar@gmail.com" class="flex items-center gap-4 p-3 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl shrink-0 no-print">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Email Address</p>
+                                    <p class="font-bold text-sm sm:text-base text-white">pratapsanjaykumar@gmail.com</p>
+                                </div>
+                            </a>
+
+                            <a href="tel:+917803433596" class="flex items-center gap-4 p-3 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 text-xl shrink-0 no-print">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Phone / WhatsApp</p>
+                                    <p class="font-bold text-sm sm:text-base text-white">+91 7803433596 / 7808343396</p>
+                                </div>
+                            </a>
+
+                            <div class="flex items-center gap-4 p-3 rounded-2xl bg-slate-900/60 border border-slate-800">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-xl shrink-0 no-print">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Location</p>
+                                    <p class="font-bold text-sm sm:text-base text-white">Paliganj, Patna, Bihar - 801110</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Form -->
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4 no-print bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                        <h3 class="text-lg font-bold text-white mb-2">Send a Message</h3>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Your Name</label>
+                            <input type="text" required placeholder="Full Name" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Your Email</label>
+                            <input type="email" required placeholder="your.email@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Message</label>
+                            <textarea rows="3" required placeholder="How can I help you?" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold hover:from-emerald-400 hover:to-teal-400 transition-all shadow-md text-sm">
+                            Send Direct Message
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 border-t border-slate-900 py-8 text-center text-xs text-slate-500">
+        <p>© <span id="year"></span> Sanjay Kumar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set Current Year dynamically
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Animation Observer
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 60;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Contact Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Message Sent!';
+            btn.classList.remove('from-emerald-500', 'to-teal-500');
+            btn.classList.add('bg-emerald-600', 'text-white');
+            setTimeout(() => {
+                e.target.reset();
+                btn.innerHTML = 'Send Direct Message';
+                btn.classList.add('from-emerald-500', 'to-teal-500');
+            }, 3000);
+        }
+
+        // Particle Canvas Background Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 35;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.2)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
